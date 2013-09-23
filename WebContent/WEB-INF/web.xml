@@ -19,4 +19,44 @@
     <servlet-name>test</servlet-name>
     <url-pattern>/test</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>osa1yl1</display-name>
+    <servlet-name>osa1yl1</servlet-name>
+    <servlet-class>test.osa1yl1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>osa1yl1</servlet-name>
+    <url-pattern>/osa1yl1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>praks1yl1</display-name>
+    <servlet-name>praks1yl1</servlet-name>
+    <servlet-class>test.praks1yl1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>praks1yl1</servlet-name>
+    <url-pattern>/praks1yl1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>praks1yl2</display-name>
+    <servlet-name>praks1yl2</servlet-name>
+    <servlet-class>test.praks1yl2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>praks1yl2</servlet-name>
+    <url-pattern>/praks1yl2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>praks1yl3</display-name>
+    <servlet-name>praks1yl3</servlet-name>
+    <servlet-class>test.praks1yl3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>praks1yl3</servlet-name>
+    <url-pattern>/praks1yl3</url-pattern>
+  </servlet-mapping>
 </web-app>
