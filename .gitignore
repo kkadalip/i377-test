@@ -1,3 +1,4 @@
 /build/*
 /WebContent/WEB-INF/lib/*.jar
 /src/tests/*
+/build
