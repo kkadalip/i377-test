@@ -59,4 +59,17 @@
     <servlet-name>praks1yl3</servlet-name>
     <url-pattern>/praks1yl3</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Osa3</display-name>
+    <servlet-name>Osa3</servlet-name>
+    <servlet-class>osa3.Osa3</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Osa3</servlet-name>
+    <url-pattern>/Osa3</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <listener-class>osa3.ServletContextListener</listener-class>
+  </listener>
 </web-app>
