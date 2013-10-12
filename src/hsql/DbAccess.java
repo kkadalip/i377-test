@@ -6,7 +6,7 @@ import org.apache.commons.dbutils.DbUtils;
 
 public class DbAccess {
 
-    private static final String DB_URL = "jdbc:hsqldb:file:${user.home}/data/mkalmo/db;shutdown=true";
+    private static final String DB_URL = "jdbc:hsqldb:file:${user.home}/data/kkadalip/db;shutdown=true";
 
     static {
         try {
