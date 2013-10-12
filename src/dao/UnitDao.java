@@ -1,10 +1,19 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.persistence.*;
+
+import org.apache.commons.dbutils.DbUtils;
 
 import model.Unit;
 
-public class UnitDao {
+public class UnitDao extends AbstractDao {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(
             "my-hsql-unit");
@@ -21,4 +30,65 @@ public class UnitDao {
 
         em.getTransaction().commit();
     }
+    
+    private void update() throws SQLException { // siia parameetrid, mille järgi updateda?... eh teistele ka siis?
+        Connection conn = DriverManager.getConnection(DB_URL);
+
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        try {
+            ps = conn.prepareStatement(
+                    "UPDATE unit SET name = ? WHERE id = ?");
+            ps.setString(1, "Mary"); // MUUDA
+            ps.setLong(2, 3L); // MUUDA
+
+            int rowCount = ps.executeUpdate();
+            System.out.println(rowCount + " rows updated!");
+
+        } finally {
+            DbUtils.closeQuietly(stmt);
+            DbUtils.closeQuietly(conn);
+        }
+    }
+
+    private void printCertain() throws SQLException {
+        Connection conn = DriverManager.getConnection(DB_URL);
+
+        PreparedStatement ps = null;
+        Statement stmt = null;
+        ResultSet rset = null;
+        try {
+            ps = conn.prepareStatement("SELECT id, name FROM unit "
+                    + "WHERE id = ?");
+            ps.setLong(1, 3L);
+            rset = ps.executeQuery();
+            while (rset.next()) {
+                System.out.println(rset.getInt(1) + ", " + rset.getString(2));
+            }
+        } finally {
+            DbUtils.closeQuietly(rset);
+            DbUtils.closeQuietly(stmt);
+            DbUtils.closeQuietly(conn);
+        }
+    }
+
+    private void printAll() throws SQLException {
+        Connection conn = DriverManager.getConnection(DB_URL);
+
+        Statement stmt = null;
+        ResultSet rset = null;
+        try {
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery("SELECT id, name FROM unit");
+            while (rset.next()) {
+                System.out.println(rset.getLong(1) + ", " + rset.getString(2));
+            }
+        } finally {
+            DbUtils.closeQuietly(rset);
+            DbUtils.closeQuietly(stmt);
+            DbUtils.closeQuietly(conn);
+        }
+    }
+
+ 
 }
