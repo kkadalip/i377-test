@@ -45,7 +45,7 @@
 		<war destfile="${war.file}" webxml="${web_content.dir}/WEB-INF/web.xml">
 			<classes dir="${classes.dir}" />
 			<fileset dir="${web_content.dir}" excludes="**/servlet-apijar2.5.jar" />
-			<fileset dir="${basedir}">
+			<fileset dir="${basedir}/src">
                 <include name="schema.sql"/>
                 <include name="testData.sql"/>
 			</fileset>

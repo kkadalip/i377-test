@@ -8,6 +8,7 @@ public abstract class AbstractDao {
 
     public static final String DB_URL =
             "jdbc:hsqldb:file:${user.home}/data/kkadalip/db;shutdown=true;";
+    		//"jdbc:hsqldb:file:${user.home}/data/kkadalip/db;shutdown=true;hsqldb.lock_file=false";
 
     private Connection connection;
     protected PreparedStatement pst;

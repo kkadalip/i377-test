@@ -15,7 +15,6 @@ public class SetupDao extends AbstractDao {
     	executeSqlFromFile(getClassPathFile("testData.sql"));
     }
     
-
     private String getClassPathFile(String fileName) {
         return getClass().getClassLoader().getResource(fileName).getFile();
     }
