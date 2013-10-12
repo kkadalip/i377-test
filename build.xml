@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="test" xmlns:ivy="antlib:org.apache.ivy.ant" default="retrieve">
-	
+	<presetdef name="javac">
+		<javac includeantruntime="false" />
+	</presetdef>	
 	<!-- src build classes -->  
 	<property name="basedir" location="." />
 	<property name="src.dir" location="${basedir}/src" />
@@ -13,10 +15,22 @@
 	<property name="ivylib.dir" location="${basedir}/lib" />
 	<property name="ivy.retrieve.pattern" value="${lib.dir}/[artifact][type][revision].[ext]" />
 
+	<path id="classpath.compile">
+		<!-- ivy teek -->
+		<fileset dir="${ivylib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<!-- allat6mmatud failide teegid -->
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
 	<!-- kompileerimiseks vajaminev ja tegevused -->
-	<target name="compile" depends="clean,init">
-		<javac srcdir="${src.dir}" destdir="${classes.dir}"
-			classpathref="classpath"/>
+	<target name="compile" depends="clean, init, retrieve">
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" source="1.6" target="1.6" includeantruntime="false">
+			<classpath refid="classpath.compile" />
+		</javac>
 	</target>
 
 	<target name="init">
@@ -31,6 +45,10 @@
 		<war destfile="${war.file}" webxml="${web_content.dir}/WEB-INF/web.xml">
 			<classes dir="${classes.dir}" />
 			<fileset dir="${web_content.dir}" excludes="**/servlet-apijar2.5.jar" />
+			<fileset dir="${basedir}">
+                <include name="schema.sql"/>
+                <include name="testData.sql"/>
+			</fileset>
 		</war>
 	</target>
 
