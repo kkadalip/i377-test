@@ -14,14 +14,14 @@ public class Osa3 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// alt shift M, setListData
 		setListData(request);
-		request.getRequestDispatcher("exKarl.jsp").forward(request, response);
+		request.getRequestDispatcher("osa3.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ka postis tuleb suunata jsp peale
 		setListData(request);
 		request.getSession().setAttribute("listName", request.getAttribute("request"));
-		response.sendRedirect("ExKarl"); // post suunab geti peale ringi
+		response.sendRedirect("Osa3"); // post suunab geti peale ringi
 		//request.getRequestDispatcher("exKarl.jsp").forward(request, response);
 		
 		//Karl karl = new Karl();
