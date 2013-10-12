@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd ">
 
-    <named-query name="Person.findAll2">
+    <named-query name="Unit.findAll">
         <query>
-            SELECT p FROM Person p
+            SELECT u FROM Unit u
         </query>
     </named-query>
 

@@ -1,6 +1,6 @@
 package beans;
 
-public class Person {
+public class Unit {
 
     private String name;
     private String firstName;

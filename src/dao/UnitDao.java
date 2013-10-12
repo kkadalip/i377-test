@@ -2,21 +2,21 @@ package dao;
 
 import javax.persistence.*;
 
-import model.Person;
+import model.Unit;
 
-public class PersonDao {
+public class UnitDao {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(
             "my-hsql-unit");
     EntityManager em = emf.createEntityManager();
 
-    public void save(Person person) {
+    public void save(Unit unit) {
         em.getTransaction().begin();
 
-        if (person.getId() == null) {
-            em.persist(person);
+        if (unit.getId() == null) {
+            em.persist(unit);
         } else {
-            em.merge(person);
+            em.merge(unit);
         }
 
         em.getTransaction().commit();
