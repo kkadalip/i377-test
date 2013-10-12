@@ -35,11 +35,7 @@
 	<br />
 	<br />
 	<form method="post" action="${homeLink}">
-		Midaiganes on
-		<%
-		request.getParameter("listName");
-	%>
-		aa <br />
+		<br />
 		<c:forEach items="defaultValues" var="each">
 			<c:set var="selected" value="selected='selected'" scope="request"></c:set>
 			<option ${selected} value="${each}">${each}</option>
