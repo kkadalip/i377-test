@@ -6,9 +6,11 @@ import javax.servlet.ServletContextEvent;
 public class ServletContextListener implements javax.servlet.ServletContextListener {
 	
     public void contextInitialized(ServletContextEvent arg0) {
+    	System.out.println("ServletContextListener initialized");
     	dao.SetupDao setup = new dao.SetupDao();
     	setup.createSchema();
     	setup.createDefaultValues();
+    	setup.destroy();
     }
 
     public void contextDestroyed(ServletContextEvent arg0) {
