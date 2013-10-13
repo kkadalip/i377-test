@@ -79,20 +79,20 @@ public class UnitDao extends AbstractDao {
 		}
 		return units;
 	}
-	
+
 	public void addUnit(Unit unit) throws SQLException{
-			int unitId = unit.getId();
-			String unitName = unit.getName();
-			String unitCode = unit.getCode();
-			String query = "INSERT INTO unit (id, name, code) VALUES ("+unitId+", '"+unitName+"', '"+unitCode+"');";
-			System.out.println(query);
+		//int unitId = unit.getId();
+		String unitName = unit.getName();
+		String unitCode = unit.getCode();
+		String query = "INSERT INTO UNIT VALUES(NEXT VALUE FOR seq1,'"+unitName+"','"+unitCode+"');";
+		System.out.println(query);
 		try {
 			st = getConnection().createStatement();
 			rs = st.executeQuery(query);
 		} finally {
 			closeResources();
 		}
-	}	
+	}
 
 	public List<Unit> searchUnits(String name) throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
@@ -112,7 +112,7 @@ public class UnitDao extends AbstractDao {
 		}
 		return units;
 	}
-	
+
 	public List<Unit> deleteUnitById(int id) throws SQLException{
 		return null;
 	}

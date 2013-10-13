@@ -39,6 +39,6 @@ public class Osa3 extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("unitsList", unitsList);
-		System.out.println("unitmap on " + unitsList.toString()); // TEST
+		System.out.println("unitsList on " + unitsList.toString()); // TEST
 	}
 }

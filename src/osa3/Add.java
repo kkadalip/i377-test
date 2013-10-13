@@ -26,7 +26,7 @@ public class Add extends HttpServlet {
 	private void addUnit(HttpServletRequest request){
 		dao.UnitDao uDao = new dao.UnitDao();
 		Unit unit = new Unit();
-		unit.setId(5);
+		//unit.setId(5);
 		unit.setName("swagger");
 		unit.setCode("1-1-1-1");
 		try {
