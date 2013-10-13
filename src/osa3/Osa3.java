@@ -18,8 +18,8 @@ public class Osa3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getUnits(request);
-		//getUnits2();
+		//getUnits(request);
+		getUnits2();
 
 		// alt shift M, setListData
 		//setListData(request);

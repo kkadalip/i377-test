@@ -44,7 +44,7 @@ public class UnitDao extends AbstractDao {
 	//					"UPDATE unit SET name = ? WHERE id = ?");
 	//			//ps.setString(unit.getId(), unit.getName());
 	//			ps.setString(1, "Mary"); // MUUDA
-	//			ps.setLong(2, 3L); // MUUDA
+	//			ps.setInt(2, 3L); // MUUDA
 	//
 	//			int rowCount = ps.executeUpdate();
 	//			System.out.println(rowCount + " rows updated!");
@@ -64,7 +64,7 @@ public class UnitDao extends AbstractDao {
 	//		try {
 	//			ps = conn.prepareStatement("SELECT id, name FROM unit "
 	//					+ "WHERE id = ?");
-	//			ps.setLong(1, 3L);
+	//			ps.setInt(1, 3L);
 	//			rset = ps.executeQuery();
 	//			while (rset.next()) {
 	//				System.out.println(rset.getInt(1) + ", " + rset.getString(2));
@@ -84,19 +84,19 @@ public class UnitDao extends AbstractDao {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery("SELECT id, name, code FROM UNIT"); // ERROR
 			while (rset.next()) {
-				long id = rset.getLong("id");
+				int id = rset.getInt("id");
 				String name = rset.getString("name");
 				String code = rset.getString("code");
 				System.out.println("id " + id + " name " + name + " code " + code);
-				//System.out.println(rset.getLong(1)); //  + ", " + rset.getString(2) + ", " + rset.getString(3)
+				//System.out.println(rset.getInt(1)); //  + ", " + rset.getString(2) + ", " + rset.getString(3)
 			}
-//			rset = stmt.executeQuery("SELECT * FROM UNIT"); // ERROR
-//			System.out.println(rset.toString());
+			//			rset = stmt.executeQuery("SELECT * FROM UNIT"); // ERROR
+			//			System.out.println(rset.toString());
 		} finally {
 			closeResources();
 		}
 	}
-	
+
 	public List<Unit> findAll () throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
@@ -111,5 +111,44 @@ public class UnitDao extends AbstractDao {
 		}
 		return units;
 	}
+
+	public List<Unit> getAllUnits() throws SQLException{
+		List<Unit> units = new ArrayList<Unit>();
+		try {
+			st = getConnection().createStatement();
+			rs = st.executeQuery("SELECT * FROM unit");
+			while(rs.next()){
+				Unit unit = new Unit();
+				unit.setId(rs.getInt(1));
+				unit.setName(rs.getString(2));
+				unit.setCode(rs.getString(3));
+				units.add(unit);
+			}
+		} finally {
+			closeResources();
+		}
+		return units;
+	}
+	
+	
+	public List<Unit> findUnitsByName(String name) throws SQLException{
+		 List<Unit> units = new ArrayList<Unit>();
+		 try {
+		  pst = getConnection().prepareStatement("SELECT * FROM unit WHERE UPPER(name) LIKE ?");
+		  pst.setString(1, "%" + name.toUpperCase() + "%");
+		  rs = pst.executeQuery();
+		  while(rs.next()){
+		   Unit unit = new Unit();
+		   unit.setId(rs.getInt(1));
+		   unit.setName(rs.getString(2));
+		   unit.setCode(rs.getString(3));
+		   units.add(unit);
+		  }
+		 
+		 } finally {
+		       closeResources();
+		     }
+		 return units;
+		}
 
 }

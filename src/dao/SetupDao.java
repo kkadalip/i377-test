@@ -31,7 +31,6 @@ public class SetupDao extends AbstractDao {
 	}
 
 	private void executeSqlFromFile(String sqlFilePath) {
-
 		Project project = new Project();
 		project.init();
 

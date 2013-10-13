@@ -8,14 +8,14 @@ public abstract class AbstractEntity {
     @Id
     @SequenceGenerator(name="my_seq", sequenceName="SEQ_1", allocationSize=1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="my_seq")
-    private Long id;
+    private int id;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(int i) {
+        this.id = i;
     }
 
 
