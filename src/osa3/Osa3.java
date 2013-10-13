@@ -19,7 +19,7 @@ public class Osa3 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		getUnits(request); // alt shift M, saab mõnusalt eraldi meetodisse lükata
-		request.getRequestDispatcher("osa3.jsp").forward(request, response);
+		request.getRequestDispatcher("osa3menu.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

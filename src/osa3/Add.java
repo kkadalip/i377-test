@@ -19,15 +19,17 @@ public class Add extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		addUnit(request);
-		response.sendRedirect("Osa3"); // post suunab geti peale ringi, mis omakorda suunab jsp peale
+		response.sendRedirect("Search"); // post suunab geti peale ringi, mis omakorda suunab jsp peale
 	}
 
 	private void addUnit(HttpServletRequest request){
+		String name = request.getParameter("name");
+		String code = request.getParameter("code");
 		dao.UnitDao uDao = new dao.UnitDao();
 		Unit unit = new Unit();
 		//unit.setId(5);
-		unit.setName("swagger");
-		unit.setCode("1-1-1-1");
+		unit.setName(name);
+		unit.setCode(code);
 		try {
 			uDao.addUnit(unit);
 		} catch (SQLException e) {

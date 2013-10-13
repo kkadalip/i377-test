@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<%@ include file="osa3.jsp" %>
+<%@ include file="osa3menu.jsp" %>
 	
 	<form method="get" action="Search">
 		<input name="searchString" id="searchStringBox" value="">

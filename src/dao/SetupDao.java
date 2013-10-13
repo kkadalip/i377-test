@@ -45,19 +45,4 @@ public class SetupDao extends AbstractDao {
 		e.setUrl(DB_URL);
 		e.execute();
 	}
-
-//	private void createTable() throws SQLException {
-//
-//		Connection conn = DriverManager.getConnection(DB_URL);
-//		Statement stmt = null;
-//		try {
-//			stmt = conn.createStatement();
-//			stmt.executeUpdate(
-//					"CREATE TABLE unit (id INT, name VARCHAR(100))"); // MUUDA
-//		} finally {
-//			DbUtils.closeQuietly(stmt);
-//			DbUtils.closeQuietly(conn);
-//		}
-//	}   
-
 }

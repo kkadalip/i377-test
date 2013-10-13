@@ -20,7 +20,7 @@ public class Search extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		searchUnits(request); // alt shift M, saab mõnusalt eraldi meetodisse lükata
-		request.getRequestDispatcher("osa3.jsp").forward(request, response);
+		request.getRequestDispatcher("osa3menu.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,14 +37,12 @@ public class Search extends HttpServlet {
 			request.getSession().setAttribute(paramText, param);
 			sessionParam = param;
 		}
-		System.out.println("Search session param is " + param);
-		System.out.println("Session attribute is " + sessionParam); // atribuut on ASI, OBJEKT
 		
 		List<Unit> foundUnits = new ArrayList<Unit>();
 		
 		dao.UnitDao uDao = new dao.UnitDao();
 		try {
-			foundUnits = uDao.searchUnits(param);
+			foundUnits = uDao.searchUnitsByName(sessionParam);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

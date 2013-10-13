@@ -18,7 +18,6 @@ import model.Unit;
 
 public class UnitDao extends AbstractDao {
 
-
 	public List<Unit> findAll() throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
@@ -50,11 +49,11 @@ public class UnitDao extends AbstractDao {
 		}
 	}
 
-	public List<Unit> searchUnits(String name) throws SQLException{
+	public List<Unit> searchUnitsByName(String searchName) throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
-			pst = getConnection().prepareStatement("SELECT * FROM unit WHERE UPPER(name) LIKE ?");
-			pst.setString(1, "%" + name.toUpperCase() + "%");
+			pst = getConnection().prepareStatement("SELECT * FROM unit WHERE name LIKE ?");
+			pst.setString(1, "%" + searchName + "%");
 			rs = pst.executeQuery();
 			while(rs.next()){
 				Unit unit = new Unit();
@@ -68,7 +67,6 @@ public class UnitDao extends AbstractDao {
 		}
 		return units;
 	}
-	
 
 	public void deleteAll() throws SQLException{
 		try {
@@ -78,5 +76,15 @@ public class UnitDao extends AbstractDao {
 			closeResources();
 		}
 	}
-	
+
+	public void deleteByID(int id) throws SQLException{
+		try {
+			pst = getConnection().prepareStatement("DELETE FROM unit WHERE id = ?;");
+			pst.setInt(1, id);
+			pst.execute();
+		} finally {
+			closeResources();
+		}
+	}
+
 }
