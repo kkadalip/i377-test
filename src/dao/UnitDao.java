@@ -79,25 +79,28 @@ public class UnitDao extends AbstractDao {
 		}
 		return units;
 	}	
-	
-	public List<Unit> findUnitsByName(String name) throws SQLException{
-		 List<Unit> units = new ArrayList<Unit>();
-		 try {
-		  pst = getConnection().prepareStatement("SELECT * FROM unit WHERE UPPER(name) LIKE ?");
-		  pst.setString(1, "%" + name.toUpperCase() + "%");
-		  rs = pst.executeQuery();
-		  while(rs.next()){
-		   Unit unit = new Unit();
-		   unit.setId(rs.getInt(1));
-		   unit.setName(rs.getString(2));
-		   unit.setCode(rs.getString(3));
-		   units.add(unit);
-		  }
-		 
-		 } finally {
-		       closeResources();
-		     }
-		 return units;
-		}
 
+	public List<Unit> findUnitsByName(String name) throws SQLException{
+		List<Unit> units = new ArrayList<Unit>();
+		try {
+			pst = getConnection().prepareStatement("SELECT * FROM unit WHERE UPPER(name) LIKE ?");
+			pst.setString(1, "%" + name.toUpperCase() + "%");
+			rs = pst.executeQuery();
+			while(rs.next()){
+				Unit unit = new Unit();
+				unit.setId(rs.getInt(1));
+				unit.setName(rs.getString(2));
+				unit.setCode(rs.getString(3));
+				units.add(unit);
+			}
+
+		} finally {
+			closeResources();
+		}
+		return units;
+	}
+	
+	public List<Unit> deleteUnitById(int id) throws SQLException{
+		return null;
+	}
 }
