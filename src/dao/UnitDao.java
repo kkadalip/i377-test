@@ -19,49 +19,6 @@ import model.Unit;
 public class UnitDao extends AbstractDao {
 
 
-	//	private void update() throws SQLException { // siia parameetrid, mille järgi updateda?... eh teistele ka siis?
-	//		Connection conn = DriverManager.getConnection(DB_URL);
-	//
-	//		PreparedStatement ps = null;
-	//		Statement stmt = null;
-	//		try {
-	//			ps = conn.prepareStatement(
-	//					"UPDATE unit SET name = ? WHERE id = ?");
-	//			//ps.setString(unit.getId(), unit.getName());
-	//			ps.setString(1, "Mary"); // MUUDA
-	//			ps.setInt(2, 3L); // MUUDA
-	//
-	//			int rowCount = ps.executeUpdate();
-	//			System.out.println(rowCount + " rows updated!");
-	//
-	//		} finally {
-	//			DbUtils.closeQuietly(stmt);
-	//			DbUtils.closeQuietly(conn);
-	//		}
-	//	}
-	//
-	//	private void printCertain() throws SQLException {
-	//		Connection conn = DriverManager.getConnection(DB_URL);
-	//
-	//		PreparedStatement ps = null;
-	//		Statement stmt = null;
-	//		ResultSet rset = null;
-	//		try {
-	//			ps = conn.prepareStatement("SELECT id, name FROM unit "
-	//					+ "WHERE id = ?");
-	//			ps.setInt(1, 3L);
-	//			rset = ps.executeQuery();
-	//			while (rset.next()) {
-	//				System.out.println(rset.getInt(1) + ", " + rset.getString(2));
-	//			}
-	//		} finally {
-	//			DbUtils.closeQuietly(rset);
-	//			DbUtils.closeQuietly(stmt);
-	//			DbUtils.closeQuietly(conn);
-	//		}
-	//	}
-	//
-
 	public List<Unit> findAll() throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
@@ -84,8 +41,7 @@ public class UnitDao extends AbstractDao {
 		//int unitId = unit.getId();
 		String unitName = unit.getName();
 		String unitCode = unit.getCode();
-		String query = "INSERT INTO UNIT VALUES(NEXT VALUE FOR seq1,'"+unitName+"','"+unitCode+"');";
-		System.out.println(query);
+		String query = "INSERT INTO unit VALUES(NEXT VALUE FOR seq1,'"+unitName+"','"+unitCode+"');";
 		try {
 			st = getConnection().createStatement();
 			rs = st.executeQuery(query);
@@ -112,8 +68,15 @@ public class UnitDao extends AbstractDao {
 		}
 		return units;
 	}
+	
 
-	public List<Unit> deleteUnitById(int id) throws SQLException{
-		return null;
+	public void deleteAll() throws SQLException{
+		try {
+			st = getConnection().createStatement();
+			rs = st.executeQuery("DELETE * FROM unit");
+		} finally {
+			closeResources();
+		}
 	}
+	
 }
