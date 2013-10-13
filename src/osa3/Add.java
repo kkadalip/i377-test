@@ -2,6 +2,8 @@ package osa3;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +16,12 @@ public class Add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("osa3add.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/osa3add.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		addUnit(request);
+		getUnits(request); // alt shift M, saab mõnusalt eraldi meetodisse lükata
 		response.sendRedirect("Search"); // post suunab geti peale ringi, mis omakorda suunab jsp peale
 	}
 
@@ -35,6 +38,19 @@ public class Add extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void getUnits(HttpServletRequest request){
+		List<Unit> unitsList = new ArrayList<Unit>();
+
+		dao.UnitDao uDao = new dao.UnitDao();
+		try {
+			unitsList = uDao.findAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("unitsList", unitsList);
+		//System.out.println("unitsList on " + unitsList.toString()); // TEST
 	}
 
 }

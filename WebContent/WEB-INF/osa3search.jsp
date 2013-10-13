@@ -23,31 +23,10 @@
 </style>
 </head>
 <body>
-<%@ include file="osa3menu.jsp" %>
-	
+	<%@ include file="osa3menu.jsp"%>
 	<form method="get" action="Search">
-		<input name="searchString" id="searchStringBox" value="">
-		
-		</input>
-	</form>
-	
-	<ul id="menu">
-		<li><a href="/part3example/Search" id="menu_Search">Otsi</a></li>
-		<li><a href="/part3example/Add" id="menu_Add">Lisa</a></li>
-		<li><a href="/part3example/Admin?do=clear_data"
-			id="menu_ClearData">Tühjenda</a></li>
-		<li><a href="/part3example/Admin?do=insert_data"
-			id="menu_InsertData">Sisesta näidisandmed</a></li>
-	</ul>
-
-	<br />
-	<br />
-	<br />
-
-	<form method="get" action="/part3example/Search">
 		<input name="searchString" id="searchStringBox" value="" /> <input
-			type="submit" id="filterButton" value="Filtreeri" /> <br />
-		<br />
+			type="submit" id="filterButton" value="Filtreeri" /> <br /> <br />
 		<table class="listTable" id="listTable">
 			<thead>
 				<tr>
@@ -57,14 +36,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope['foundUnits']}" var="item">
+				<c:forEach items="${requestScope['displayedUnits']}" var="item">
 					<tr>
-							<td>
-								<div id="row_${item.code}">${item.name}</div>
+						<td>
+							<div id="row_${item.code}">${item.name}</div>
 						</td>
-							<td>${item.code}</td>
-							<td><a href="/part3example/Search?do=delete&id=${unit.id}"
-								id="delete_${unit.code}">Kustuta</a></td>
+						<td>${item.code}</td>
+						<td><a href="Search?do=delete&id=${item.id}"
+							id="delete_${item.code}">Kustuta</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

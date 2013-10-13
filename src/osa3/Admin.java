@@ -15,18 +15,22 @@ public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String behaviour = request.getParameter("do");
-			// Tühjenda
-			if(behaviour == "clear_data"){
-				clear();
-			// Sisesta näidisandmed	
-			}else if(behaviour == "insert_data"){
-				insertDefaultValues();
-			}
+		doStuff(request);
+		response.sendRedirect("Search");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("Search");
+	}
+
+	private void doStuff(HttpServletRequest request){
+		String behaviour = request.getParameter("do");
+		// Tühjenda
+		if("insert_data".equals(behaviour)){
+			insertDefaultValues();
+			// Sisesta näidisandmed	
+		}else if("clear_data".equals(behaviour)){
+			clear();
+		}
 	}
 
 	private void clear(){
@@ -37,8 +41,7 @@ public class Admin extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	// kui parameeter on menu_InsertData, siis
+
 	private void insertDefaultValues(){
 		System.out.println("Adding default values once more");
 		dao.SetupDao setup = new dao.SetupDao();

@@ -52,8 +52,8 @@ public class UnitDao extends AbstractDao {
 	public List<Unit> searchUnitsByName(String searchName) throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
-			pst = getConnection().prepareStatement("SELECT * FROM unit WHERE name LIKE ?");
-			pst.setString(1, "%" + searchName + "%");
+			pst = getConnection().prepareStatement("SELECT * FROM unit WHERE LOWER(name) LIKE ?");
+			pst.setString(1, "%" + searchName.toLowerCase() + "%");
 			rs = pst.executeQuery();
 			while(rs.next()){
 				Unit unit = new Unit();
@@ -71,7 +71,7 @@ public class UnitDao extends AbstractDao {
 	public void deleteAll() throws SQLException{
 		try {
 			st = getConnection().createStatement();
-			rs = st.executeQuery("DELETE * FROM unit");
+			rs = st.executeQuery("TRUNCATE TABLE unit;");
 		} finally {
 			closeResources();
 		}
