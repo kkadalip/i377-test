@@ -18,21 +18,6 @@ import model.Unit;
 
 public class UnitDao extends AbstractDao {
 
-	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory(
-	//			"my-hsql-unit");
-	//	EntityManager em = emf.createEntityManager();
-	//
-	//	public void save(Unit unit) {
-	//		em.getTransaction().begin();
-	//
-	//		if (unit.getId() == null) {
-	//			em.persist(unit);
-	//		} else {
-	//			em.merge(unit);
-	//		}
-	//
-	//		em.getTransaction().commit();
-	//	}
 
 	//	private void update() throws SQLException { // siia parameetrid, mille järgi updateda?... eh teistele ka siis?
 	//		Connection conn = DriverManager.getConnection(DB_URL);
@@ -76,60 +61,24 @@ public class UnitDao extends AbstractDao {
 	//		}
 	//	}
 	//
-	public void findAll2() throws SQLException {
-		Connection conn = DriverManager.getConnection(DB_URL);
-		Statement stmt = null;
-		ResultSet rset = null;
-		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery("SELECT id, name, code FROM UNIT"); // ERROR
-			while (rset.next()) {
-				int id = rset.getInt("id");
-				String name = rset.getString("name");
-				String code = rset.getString("code");
-				System.out.println("id " + id + " name " + name + " code " + code);
-				//System.out.println(rset.getInt(1)); //  + ", " + rset.getString(2) + ", " + rset.getString(3)
-			}
-			//			rset = stmt.executeQuery("SELECT * FROM UNIT"); // ERROR
-			//			System.out.println(rset.toString());
-		} finally {
-			closeResources();
-		}
-	}
 
-	public List<Unit> findAll () throws SQLException{
-		List<Unit> units = new ArrayList<Unit>();
-		try {
-			st=getConnection().createStatement();
-			while(rs.next()){
-				Unit unit = new Unit();
-				unit.setName(rs.getString(1));
-				units.add(unit); 
-			}
-		} finally {
-			closeResources();
-		}
-		return units;
-	}
-
-	public List<Unit> getAllUnits() throws SQLException{
+	public List<Unit> findAll() throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
 			st = getConnection().createStatement();
 			rs = st.executeQuery("SELECT * FROM unit");
 			while(rs.next()){
 				Unit unit = new Unit();
-				unit.setId(rs.getInt(1));
-				unit.setName(rs.getString(2));
-				unit.setCode(rs.getString(3));
+				unit.setId(rs.getInt(1)); // id
+				unit.setName(rs.getString(2)); // name
+				unit.setCode(rs.getString(3)); // code
 				units.add(unit);
 			}
 		} finally {
 			closeResources();
 		}
 		return units;
-	}
-	
+	}	
 	
 	public List<Unit> findUnitsByName(String name) throws SQLException{
 		 List<Unit> units = new ArrayList<Unit>();
