@@ -25,13 +25,11 @@ public class Search extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		searchUnits(request);
-		//request.getSession().setParameter("listName", request.getAttribute("request"));
-		//request.getSession().setAttribute("listName", request.getParameter("request"));
-		response.sendRedirect("Search"); // post suunab geti peale ringi, mis omakorda suunab jsp peale
+		response.sendRedirect("Osa3"); // Search // post suunab geti peale ringi, mis omakorda suunab jsp peale
 	}
 	
 	private void searchUnits(HttpServletRequest request){
-		String paramText = "do";
+		String paramText = "searchString"; //do
 		HttpSession session = request.getSession();
 		String param = request.getParameter(paramText);
 		String sessionParam = (String)session.getAttribute(paramText);
@@ -40,6 +38,7 @@ public class Search extends HttpServlet {
 			sessionParam = param;
 		}
 		System.out.println("Search session param is " + param);
+		System.out.println("Session attribute is " + sessionParam); // atribuut on ASI, OBJEKT
 		
 		List<Unit> foundUnits = new ArrayList<Unit>();
 		
@@ -49,7 +48,7 @@ public class Search extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		request.setAttribute("foundUnits", foundUnits);
 		System.out.println("searchiga leitud unitid on " + foundUnits.toString());
 	}
 
