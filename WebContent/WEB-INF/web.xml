@@ -22,4 +22,34 @@
     <servlet-name>Osa3</servlet-name>
     <url-pattern>/Osa3</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Search</display-name>
+    <servlet-name>Search</servlet-name>
+    <servlet-class>osa3.Search</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Search</servlet-name>
+    <url-pattern>/Search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Add</display-name>
+    <servlet-name>Add</servlet-name>
+    <servlet-class>osa3.Add</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Add</servlet-name>
+    <url-pattern>/Add</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Admin</display-name>
+    <servlet-name>Admin</servlet-name>
+    <servlet-class>osa3.Admin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Admin</servlet-name>
+    <url-pattern>/Admin</url-pattern>
+  </servlet-mapping>
 </web-app>
