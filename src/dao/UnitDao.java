@@ -80,7 +80,7 @@ public class UnitDao extends AbstractDao {
 		return units;
 	}	
 
-	public List<Unit> findUnitsByName(String name) throws SQLException{
+	public List<Unit> searchUnits(String name) throws SQLException{
 		List<Unit> units = new ArrayList<Unit>();
 		try {
 			pst = getConnection().prepareStatement("SELECT * FROM unit WHERE UPPER(name) LIKE ?");

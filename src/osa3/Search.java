@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Unit;
 
@@ -30,22 +31,26 @@ public class Search extends HttpServlet {
 	}
 	
 	private void searchUnits(HttpServletRequest request){
-		List<Unit> units = new ArrayList<Unit>();
+		String paramText = "do";
+		HttpSession session = request.getSession();
+		String param = request.getParameter(paramText);
+		String sessionParam = (String)session.getAttribute(paramText);
+		if(param != null){
+			request.getSession().setAttribute(paramText, param);
+			sessionParam = param;
+		}
+		System.out.println("Search session param is " + param);
+		
+		List<Unit> foundUnits = new ArrayList<Unit>();
 		
 		dao.UnitDao uDao = new dao.UnitDao();
 		try {
-			units = uDao.findUnit();
+			foundUnits = uDao.searchUnits(param);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		LinkedHashMap<String, String> searchMap = new LinkedHashMap<String, String>();
-		for(Iterator<Unit> i = units.iterator(); i.hasNext(); ) {
-			Unit item = i.next();
-			searchMap.put(item.getName(), item.getCode());
-		}
-		request.setAttribute("search", searchMap);
 		
-		System.out.println("searchmap on " + unitMap.toString());
+		System.out.println("searchiga leitud unitid on " + foundUnits.toString());
 	}
 
 }
