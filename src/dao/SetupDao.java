@@ -15,22 +15,23 @@ import org.apache.tools.ant.taskdefs.SQLExec;
 public class SetupDao extends AbstractDao {
 
 	public void createSchema() {
-		executeSqlFromFile(getClassPathFile("schema.sql"));
+        executeSqlFromFile(getClassPathFile("schema.sql"));
 	}
 
 	public void createDefaultValues() {
-		executeSqlFromFile(getClassPathFile("testData.sql"));
+		executeSqlFromFile(getClassPathFile("defaultValues.sql"));
 	}
 
 	public void destroy() {
 		executeQuery("DROP SCHEMA PUBLIC CASCADE;");
 	}
 
-	private String getClassPathFile(String fileName) {
-		return getClass().getClassLoader().getResource(fileName).getFile();
-	}
+    private String getClassPathFile(String fileName) {
+        return getClass().getClassLoader().getResource(fileName).getFile();
+    }
 
 	private void executeSqlFromFile(String sqlFilePath) {
+		System.out.println("Filepath is " + sqlFilePath);
 		Project project = new Project();
 		project.init();
 
